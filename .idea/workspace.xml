@@ -56,7 +56,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753265588269</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="백엔드 준비">
+      <option name="closed" value="true" />
+      <created>1753265933160</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1753265933160</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
