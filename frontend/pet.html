@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pet-Project</title>
+    <link rel="stylesheet" href="pet.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- 헤더 -->
+      <div class="header">
+        <div class="logo">
+          <span>🐕</span>
+          <h1>Pet-Project</h1>
+        </div>
+        <div class="nav-buttons">
+          <button class="btn btn-secondary" onclick="showLogin()">
+            로그인
+          </button>
+          <button class="btn btn-primary" onclick="showRegister()">
+            회원가입
+          </button>
+        </div>
+      </div>
+
+      <!-- 메인 콘텐츠 (로그인 전) -->
+      <div class="main-content" id="mainContent">
+        <div class="content-card">
+          <div class="card-header">
+            <div class="card-icon icon-monitoring">📹</div>
+            <div>
+              <h2 class="card-title">실시간 모니터링</h2>
+              <p>언제 어디서든 반려견의 상태를 실시간으로 확인하세요</p>
+            </div>
+          </div>
+          <ul style="list-style: none; padding-left: 0">
+            <li style="margin-bottom: 10px">📍 GPS 위치 추적</li>
+            <li style="margin-bottom: 10px">📊 활동량 모니터링</li>
+            <li style="margin-bottom: 10px">🎥 라이브 영상 스트리밍</li>
+            <li style="margin-bottom: 10px">🔔 실시간 알림</li>
+          </ul>
+        </div>
+
+        <div class="content-card">
+          <div class="card-header">
+            <div class="card-icon icon-voice">🎤</div>
+            <div>
+              <h2 class="card-title">음성 명령 관리</h2>
+              <p>주인의 목소리로 반려견을 원격 제어하세요</p>
+            </div>
+          </div>
+          <ul style="list-style: none; padding-left: 0">
+            <li style="margin-bottom: 10px">🎙️ 음성 명령 녹음</li>
+            <li style="margin-bottom: 10px">📱 원터치 명령 전송</li>
+            <li style="margin-bottom: 10px">🔊 고품질 음성 재생</li>
+            <li style="margin-bottom: 10px">📚 명령어 관리</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 대시보드 (로그인 후) -->
+      <div class="dashboard" id="dashboard">
+        <!-- 반려견 정보 -->
+        <div class="dashboard-card pet-info">
+          <h3 style="margin-bottom: 15px">🐕 반려견 정보</h3>
+          <div class="pet-card">
+            <div class="pet-avatar">🐕</div>
+            <div class="pet-details">
+              <h3>멍멍이</h3>
+              <p>골든 리트리버 • 3살</p>
+              <p>무게: 25kg</p>
+              <div class="status-indicator status-online">
+                <div class="status-dot"></div>
+                온라인
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 실시간 통계 -->
+        <div class="dashboard-card stat-card">
+          <span class="stat-number">12,543</span>
+          <div class="stat-label">오늘 걸음 수</div>
+        </div>
+
+        <div class="dashboard-card stat-card">
+          <span class="stat-number">2.3km</span>
+          <div class="stat-label">이동 거리</div>
+        </div>
+
+        <div class="dashboard-card stat-card">
+          <span class="stat-number">85%</span>
+          <div class="stat-label">배터리 잔량</div>
+        </div>
+
+        <div class="dashboard-card stat-card">
+          <span class="stat-number">38.0℃</span>
+          <div class="stat-label">체온</div>
+        </div>
+
+        <!-- 실시간 모니터링 -->
+        <div
+          class="dashboard-card monitoring-section"
+          style="grid-column: 1 / -1"
+        >
+          <h3 style="margin-bottom: 20px">📹 실시간 모니터링</h3>
+          <div class="video-container">
+            <div class="video-placeholder">
+              <div style="font-size: 3rem; margin-bottom: 10px">📹</div>
+              <p>실시간 영상 스트리밍</p>
+              <small>목줄 연결 대기 중...</small>
+            </div>
+          </div>
+          <div class="control-panel">
+            <button class="control-btn" onclick="toggleStream()">
+              스트리밍 시작
+            </button>
+            <button class="control-btn" onclick="takeSnapshot()">스냅샷</button>
+            <button class="control-btn" onclick="toggleFullscreen()">
+              전체화면
+            </button>
+          </div>
+        </div>
+
+        <!-- 음성 명령 -->
+        <div class="dashboard-card voice-section" style="grid-column: 1 / -1">
+          <h3 style="margin-bottom: 20px">🎤 음성 명령 관리</h3>
+          <div class="voice-commands">
+            <button class="command-btn" onclick="sendCommand('sit')">
+              앉아
+            </button>
+            <button class="command-btn" onclick="sendCommand('stay')">
+              기다려
+            </button>
+            <button class="command-btn" onclick="sendCommand('come')">
+              이리와
+            </button>
+            <button class="command-btn" onclick="sendCommand('down')">
+              엎드려
+            </button>
+            <button class="command-btn" onclick="sendCommand('heel')">
+              뒤로
+            </button>
+            <button class="command-btn" onclick="sendCommand('stop')">
+              멈춰
+            </button>
+          </div>
+
+          <div class="recording-section">
+            <h4 style="margin-bottom: 15px">새 명령 녹음</h4>
+            <button class="record-btn" onclick="toggleRecording()">
+              <span id="recordIcon">🎙️</span>
+              <span id="recordText">녹음 시작</span>
+            </button>
+            <div
+              id="recordingStatus"
+              style="text-align: center; margin-top: 10px; color: #6b7280"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 로그인 모달 -->
+    <div class="modal" id="loginModal">
+      <div class="modal-content">
+        <button class="close-modal" onclick="closeModal('loginModal')">
+          &times;
+        </button>
+        <h2 style="margin-bottom: 25px; text-align: center">로그인</h2>
+        <form onsubmit="login(event)">
+          <div class="form-group">
+            <label for="loginEmail">이메일</label>
+            <input type="email" id="loginEmail" required />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">비밀번호</label>
+            <input type="password" id="loginPassword" required />
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%">
+            로그인
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- 회원가입 모달 -->
+    <div class="modal" id="registerModal">
+      <div class="modal-content">
+        <button class="close-modal" onclick="closeModal('registerModal')">
+          &times;
+        </button>
+        <h2 style="margin-bottom: 25px; text-align: center">회원가입</h2>
+        <form onsubmit="register(event)">
+          <div class="form-group">
+            <label for="registerName">이름</label>
+            <input type="text" id="registerName" required />
+          </div>
+          <div class="form-group">
+            <label for="registerEmail">이메일</label>
+            <input type="email" id="registerEmail" required />
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">비밀번호</label>
+            <input type="password" id="registerPassword" required />
+          </div>
+          <div class="form-group">
+            <label for="petName">반려견 이름</label>
+            <input type="text" id="petName" required />
+          </div>
+          <div class="form-group">
+            <label for="petBreed">품종</label>
+            <input type="text" id="petBreed" required />
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%">
+            회원가입
+          </button>
+        </form>
+      </div>
+    </div>
+    <script src="pet.js"></script>
+    <script src="react-loader.js"></script>
+  </body>
+</html>
